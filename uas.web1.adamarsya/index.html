@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aplikasi Simpan Pinjam</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Styles */
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        header {
+            background-color: #007bff;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        header img {
+            height: 50px;
+        }
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+        nav ul li {
+            margin: 0 20px;
+        }
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 16px;
+            transition: color 0.3s;
+        }
+        nav ul li a:hover, nav ul li a.active {
+            color: #ffdd57;
+        }
+        main {
+            padding: 30px;
+            max-width: 1200px;
+            margin: auto;
+            display: none; /* Default to hidden */
+        }
+        main.active {
+            display: block; /* Only active section is shown */
+        }
+        h1 {
+            color: #007bff;
+        }
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .photo-grid img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s;
+        }
+        .photo-grid img:hover {
+            transform: scale(1.05);
+        }
+        footer {
+            text-align: center;
+            padding: 15px;
+            background-color: #007bff;
+            color: white;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="hxh.jpeg" alt="Logo Aplikasi">
+        <nav>
+            <ul>
+                <li><a class="active" onclick="showPage('home')">Beranda</a></li>
+                <li><a onclick="showPage('transaksi')">Transaksi</a></li>
+                <li><a onclick="showPage('profil')">Profil</a></li>
+                <li><a onclick="showPage('login')">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main id="home" class="active">
+        <h1>Selamat Datang di Aplikasi Simpan Pinjam</h1>
+        <p>Kelola keuangan Anda dengan lebih mudah, aman, dan nyaman. Kami hadir untuk membantu Anda.</p>
+        <div class="photo-grid">
+            <img src="mainan.jpeg" alt="Foto 1">
+            <img src="2.jpeg" alt="Foto 2">
+            <img src="5.jpeg" alt="Foto 3">
+            <img src="4.jpeg" alt="Foto 4">
+        </div>
+    </main>
+    <main id="transaksi">
+        <h1>Halaman Transaksi</h1>
+        <p>Telusuri riwayat transaksi Anda atau buat transaksi baru dengan mudah.</p>
+        <button>Tambah Transaksi</button>
+    </main>
+    <main id="profil">
+        <h1>Halaman Profil</h1>
+        <p>Perbarui informasi profil Anda agar tetap terkini.</p>
+    </main>
+    <main id="login">
+        <h1>Login</h1>
+        <form action="dashboard.html" method="post">
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit">Login</button>
+        </form>
+    </main>
+    <footer>
+        <p>&copy; 2025 Universitas Pamulang. All Rights Reserved.</p>
+    </footer>
+    <script>
+        // JavaScript to handle dynamic content
+        function showPage(pageId) {
+            // Hide all main sections
+            const sections = document.querySelectorAll('main');
+            sections.forEach(section => section.classList.remove('active'));
+            
+            // Show the selected section
+            const activeSection = document.getElementById(pageId);
+            if (activeSection) {
+                activeSection.classList.add('active');
+            }
+            
+            // Update active menu link
+            const links = document.querySelectorAll('nav ul li a');
+            links.forEach(link => link.classList.remove('active'));
+            const activeLink = Array.from(links).find(link => link.getAttribute('onclick') === `showPage('${pageId}')`);
+            if (activeLink) {
+                activeLink.classList.add('active');
+            }
+        }
+    </script>
+</body>
+</html>
+<main id="login">
+    <h1>Login</h1>
+    <form id="loginForm">
+        <div class="form-group">
+            <label for="username">adam:</label>
+            <input type="text" id="username" name="username">
+            <small style="color: red; display: none;" id="usernameError">Username tidak boleh kosong</small>
+        </div>
+        <div class="form-group">
+            <label for="password">adamadam:</label>
+            <input type="password" id="password" name="password">
+            <small style="color: red; display: none;" id="passwordError">Password tidak boleh kosong</small>
+        </div>
+        <button type="submit">Login</button>
+    </form>
+</main>
+
+<script>
+    // Validasi Form Login
+    const loginForm = document.getElementById('loginForm');
+
+    loginForm.addEventListener('submit', function(event) {
+        // Ambil input username dan password
+        const usernameInput = document.getElementById('username');
+        const passwordInput = document.getElementById('password');
+        const usernameError = document.getElementById('usernameError');
+        const passwordError = document.getElementById('passwordError');
+
+        let isValid = true;
+
+        // Validasi Username
+        if (usernameInput.value.trim() === '') {
+            usernameError.style.display = 'block';
+            isValid = false;
+        } else {
+            usernameError.style.display = 'none';
+        }
+
+        // Validasi Password
+        if (passwordInput.value.trim() === '') {
+            passwordError.style.display = 'block';
+            isValid = false;
+        } else {
+            passwordError.style.display = 'none';
+        }
+
+        // Jika tidak valid, hentikan pengiriman formulir
+        if (!isValid) {
+            event.preventDefault();
+        }
+    });
+</script>
